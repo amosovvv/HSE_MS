@@ -1,0 +1,161 @@
+ubuntu@rc1b-dataproc-m-oqepl5n5ud95m1lu:~$ spark-shell
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/lib/spark/jars/log4j-slf4j-impl-2.17.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/lib/hadoop/lib/slf4j-log4j12-1.7.30.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/03/02 11:14:37 WARN Utils: spark.executor.instances less than spark.dynamicAllocation.minExecutors is invalid, ignoring its setting, please update your configs.
+26/03/02 11:14:53 WARN Utils: spark.executor.instances less than spark.dynamicAllocation.minExecutors is invalid, ignoring its setting, please update your configs.
+26/03/02 11:14:53 WARN YarnSchedulerBackend$YarnSchedulerEndpoint: Attempted to request executors before the AM has registered!
+Spark context Web UI available at http://rc1b-dataproc-m-oqepl5n5ud95m1lu.mdb.yandexcloud.net:4040
+Spark context available as 'sc' (master = yarn, app id = application_1772449015378_0006).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.3.2
+      /_/
+
+Using Scala version 2.12.15 (OpenJDK 64-Bit Server VM, Java 1.8.0_452)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+
+
+//Проверка, что Spark установлен и работает
+
+scala> sc.parallelize(1 to 1000000).sum()
+res0: Double = 5.000005E11
+
+
+
+
+//RDD vs DataFrame
+
+scala> val rdd = sc.parallelize(Seq(1,2,3,4,5))
+rdd: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[2] at parallelize at <console>:23
+
+scala> rdd.map(_ * 2).collect()
+res1: Array[Int] = Array(2, 4, 6, 8, 10)
+
+scala> val df = spark.range(5)
+df: org.apache.spark.sql.Dataset[Long] = [id: bigint]
+
+scala> df.selectExpr("id * 2 as value").show()
++-----+
+|value|
++-----+
+|    0|
+|    2|
+|    4|
+|    6|
+|    8|
++-----+
+
+
+
+//Lazy evaluation
+
+scala> val df = spark.range(1000000)
+df: org.apache.spark.sql.Dataset[Long] = [id: bigint]
+
+scala> val df2 = df.filter("id % 2 = 0")
+df2: org.apache.spark.sql.Dataset[Long] = [id: bigint]
+
+scala> df2.count()
+res7: Long = 500000
+
+
+
+//Агрегации и shuffle
+
+scala> val data = Seq(
+     |   ("user1","A",100),
+     |   ("user1","B",200),
+     |   ("user2","A",50)
+     | )
+data: Seq[(String, String, Int)] = List((user1,A,100), (user1,B,200), (user2,A,50))
+
+scala> val df = spark.createDataFrame(data).toDF("user","category","amount")
+df: org.apache.spark.sql.DataFrame = [user: string, category: string ... 1 more field]
+
+scala> df.groupBy("user").sum("amount").show()
++-----+-----------+
+| user|sum(amount)|
++-----+-----------+
+|user1|        300|
+|user2|         50|
++-----+-----------+
+
+
+
+//Join и broadcast
+
+scala> val users = Seq(
+     |   ("user1","Berlin"),
+     |   ("user2","Munich")
+     | ).toDF("user","city")
+users: org.apache.spark.sql.DataFrame = [user: string, city: string]
+
+scala> val orders = Seq(
+     |   ("user1",100),
+     |   ("user1",50),
+     |   ("user2",300)
+     | ).toDF("user","amount")
+orders: org.apache.spark.sql.DataFrame = [user: string, amount: int]
+
+scala> users.join(orders, "user").show()
++-----+------+------+
+| user|  city|amount|
++-----+------+------+
+|user1|Berlin|    50|
+|user1|Berlin|   100|
+|user2|Munich|   300|
++-----+------+------+
+
+scala> import org.apache.spark.sql.functions.broadcast
+import org.apache.spark.sql.functions.broadcast
+
+scala> broadcast(users).join(orders, "user").show()
++-----+------+------+
+| user|  city|amount|
++-----+------+------+
+|user1|Berlin|   100|
+|user1|Berlin|    50|
+|user2|Munich|   300|
++-----+------+------+
+
+
+
+//Cache / Persist
+scala> val df = spark.range(5000000)
+df: org.apache.spark.sql.Dataset[Long] = [id: bigint]
+
+scala> df.cache()
+res21: df.type = [id: bigint]
+
+scala> df.count()
+res22: Long = 5000000
+
+scala> df.filter("id % 2 = 0").count()
+res23: Long = 2500000
+
+scala> df.filter("id % 3 = 0").count()
+res24: Long = 1666667
+
+
+
+//Запись данных (Parquet)
+
+scala> spark.range(10000).write.mode("overwrite").parquet("hdfs:///tmp/spark_demo")
+
+:quit
+
+scala> ubuntu@rc1b-dataproc-m-oqepl5n5ud95m1lu:~$ hdfs dfs -ls /tmp/spark_demo
+Found 3 items
+-rw-r--r--   1 ubuntu hadoop          0 2026-03-02 11:47 /tmp/spark_demo/_SUCCESS
+-rw-r--r--   1 ubuntu hadoop      20502 2026-03-02 11:47 /tmp/spark_demo/part-00000-a846c42c-f52c-4c5c-b071-73f17ba03bb6-c000.snappy.parquet
+-rw-r--r--   1 ubuntu hadoop      20501 2026-03-02 11:47 /tmp/spark_demo/part-00001-a846c42c-f52c-4c5c-b071-73f17ba03bb6-c000.snappy.parquet

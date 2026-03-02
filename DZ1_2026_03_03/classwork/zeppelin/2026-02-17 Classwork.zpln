@@ -1,0 +1,695 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.pyspark\r\nprint(spark.version)\r\nprint(spark.sparkContext.master)\r\nspark.range(100000).count()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "3.3.2\nyarn\n100000\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=43",
+              "$$hashKey": "object:4870"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=44",
+              "$$hashKey": "object:4871"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772464562864_2138402948",
+      "id": "paragraph_1772464562864_2138402948",
+      "dateCreated": "2026-03-02T15:16:02+0000",
+      "dateStarted": "2026-03-02T17:17:23+0000",
+      "dateFinished": "2026-03-02T17:17:23+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:3627"
+    },
+    {
+      "text": "%spark.pyspark\r\nrdd = sc.parallelize([1,2,3,4,5])\r\nrdd.map(lambda x: x * 2).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[2, 4, 6, 8, 10]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=45",
+              "$$hashKey": "object:4915"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772464583197_1849271564",
+      "id": "paragraph_1772464583197_1849271564",
+      "dateCreated": "2026-03-02T15:16:23+0000",
+      "dateStarted": "2026-03-02T17:17:24+0000",
+      "dateFinished": "2026-03-02T17:17:24+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3628"
+    },
+    {
+      "text": "%spark.pyspark\ndf = spark.createDataFrame([(1,), (2,), (3,)], [\"value\"])\ndf.selectExpr(\"value * 2 as value\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:24+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+\n|value|\n+-----+\n|    2|\n|    4|\n|    6|\n+-----+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=46",
+              "$$hashKey": "object:4965"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=47",
+              "$$hashKey": "object:4966"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772464905330_1521663501",
+      "id": "paragraph_1772464905330_1521663501",
+      "dateCreated": "2026-03-02T15:21:45+0000",
+      "dateStarted": "2026-03-02T17:17:24+0000",
+      "dateFinished": "2026-03-02T17:17:24+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3629"
+    },
+    {
+      "text": "%spark.pyspark\r\ndf = spark.range(1_000_000)\r\ndf2 = df.filter(\"id % 2 = 0\")\r\nprint(\"Spark ещё ничего не считал\")\r\ndf2.count()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:24+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Spark ещё ничего не считал\n500000\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=48",
+              "$$hashKey": "object:5025"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=49",
+              "$$hashKey": "object:5026"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772464986032_2097112645",
+      "id": "paragraph_1772464986032_2097112645",
+      "dateCreated": "2026-03-02T15:23:06+0000",
+      "dateStarted": "2026-03-02T17:17:24+0000",
+      "dateFinished": "2026-03-02T17:17:24+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3630"
+    },
+    {
+      "text": "%spark.pyspark\nfrom pyspark.sql import functions as F\ndata = [\n    (\"user1\",\"A\",100),\n    (\"user1\",\"B\",200),\n    (\"user2\",\"A\",50),\n]\ndf = spark.createDataFrame(data, [\"user\",\"category\",\"amount\"])\ndf.groupBy(\"user\").agg(F.sum(\"amount\")).show()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:24+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+-----------+\n| user|sum(amount)|\n+-----+-----------+\n|user1|        300|\n|user2|         50|\n+-----+-----------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=50",
+              "$$hashKey": "object:5075"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=51",
+              "$$hashKey": "object:5076"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772465117714_846267551",
+      "id": "paragraph_1772465117714_846267551",
+      "dateCreated": "2026-03-02T15:25:17+0000",
+      "dateStarted": "2026-03-02T17:17:24+0000",
+      "dateFinished": "2026-03-02T17:17:25+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3631"
+    },
+    {
+      "text": "%spark.pyspark\nfrom pyspark.sql.functions import broadcast\nusers = spark.createDataFrame(\n    [(\"user1\",\"Berlin\"),(\"user2\",\"Munich\")],\n    [\"user\",\"city\"]\n)\norders = spark.createDataFrame(\n    [(\"user1\",100),(\"user2\",300)],\n    [\"user\",\"amount\"]\n)\nusers.join(orders, \"user\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:25+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+------+------+\n| user|  city|amount|\n+-----+------+------+\n|user1|Berlin|   100|\n|user2|Munich|   300|\n+-----+------+------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=52",
+              "$$hashKey": "object:5140"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=53",
+              "$$hashKey": "object:5141"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=54",
+              "$$hashKey": "object:5142"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772465320959_1213740141",
+      "id": "paragraph_1772465320959_1213740141",
+      "dateCreated": "2026-03-02T15:28:40+0000",
+      "dateStarted": "2026-03-02T17:17:25+0000",
+      "dateFinished": "2026-03-02T17:17:25+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3632"
+    },
+    {
+      "text": "%spark.pyspark\nbroadcast(users).join(orders, \"user\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:25+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+------+------+\n| user|  city|amount|\n+-----+------+------+\n|user1|Berlin|   100|\n|user2|Munich|   300|\n+-----+------+------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=56",
+              "$$hashKey": "object:5195"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=57",
+              "$$hashKey": "object:5196"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772465475526_1998993967",
+      "id": "paragraph_1772465475526_1998993967",
+      "dateCreated": "2026-03-02T15:31:15+0000",
+      "dateStarted": "2026-03-02T17:17:25+0000",
+      "dateFinished": "2026-03-02T17:17:25+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3633"
+    },
+    {
+      "text": "%spark.pyspark\nfrom pyspark.sql.window import Window\nfrom pyspark.sql.functions import row_number, desc\ndf = spark.createDataFrame(\n    [(\"user1\",100),(\"user1\",200),(\"user1\",50)],\n    [\"user\",\"amount\"]\n)\nw = Window.partitionBy(\"user\").orderBy(desc(\"amount\"))\ndf.withColumn(\"rn\", row_number().over(w)).show()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:25+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+------+---+\n| user|amount| rn|\n+-----+------+---+\n|user1|   200|  1|\n|user1|   100|  2|\n|user1|    50|  3|\n+-----+------+---+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=58",
+              "$$hashKey": "object:5250"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=59",
+              "$$hashKey": "object:5251"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772465495919_1898458621",
+      "id": "paragraph_1772465495919_1898458621",
+      "dateCreated": "2026-03-02T15:31:35+0000",
+      "dateStarted": "2026-03-02T17:17:25+0000",
+      "dateFinished": "2026-03-02T17:17:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3634"
+    },
+    {
+      "text": "%spark.pyspark\nfrom pyspark.sql import functions as F\nbig = spark.range(5_000_000).withColumn(\"x\", (F.col(\"id\") % 10).cast(\"int\"))\n#big.cache()\nbig.count()\nbig.filter(\"x == 1\").count()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:26+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "500000\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=60",
+              "$$hashKey": "object:5335"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=61",
+              "$$hashKey": "object:5336"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=62",
+              "$$hashKey": "object:5337"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=63",
+              "$$hashKey": "object:5338"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772465613380_1154370672",
+      "id": "paragraph_1772465613380_1154370672",
+      "dateCreated": "2026-03-02T15:33:33+0000",
+      "dateStarted": "2026-03-02T17:17:26+0000",
+      "dateFinished": "2026-03-02T17:17:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3635"
+    },
+    {
+      "text": "%spark.pyspark\nbig.filter(\"x == 2\").count()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:26+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "500000\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=64",
+              "$$hashKey": "object:5400"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=65",
+              "$$hashKey": "object:5401"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772465900758_2047148596",
+      "id": "paragraph_1772465900758_2047148596",
+      "dateCreated": "2026-03-02T15:38:20+0000",
+      "dateStarted": "2026-03-02T17:17:26+0000",
+      "dateFinished": "2026-03-02T17:17:27+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3636"
+    },
+    {
+      "text": "%spark.pyspark\npath = \"s3a://hadoop-baket/demo/\"\ndf = spark.range(10000)\ndf.write.mode(\"overwrite\").parquet(path)\nspark.read.parquet(path).count()",
+      "user": "anonymous",
+      "dateUpdated": "2026-03-02T17:17:27+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "10000\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=66",
+              "$$hashKey": "object:5485"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=67",
+              "$$hashKey": "object:5486"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=68",
+              "$$hashKey": "object:5487"
+            },
+            {
+              "jobUrl": "https://ui-c9q5ig29v80hm8tbbnmt-rc1b-dataproc-d-2j9ttbntt33oqh2g-43399.dataproc-ui.yandexcloud.net/jobs/job?id=69",
+              "$$hashKey": "object:5488"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1772465932071_824944884",
+      "id": "paragraph_1772465932071_824944884",
+      "dateCreated": "2026-03-02T15:38:52+0000",
+      "dateStarted": "2026-03-02T17:17:27+0000",
+      "dateFinished": "2026-03-02T17:17:31+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3637"
+    }
+  ],
+  "name": "2026-02-17 Classwork",
+  "id": "2MKQ2HA7S",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/2026-02-17 Classwork"
+}
