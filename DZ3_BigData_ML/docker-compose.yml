@@ -1,0 +1,121 @@
+version: '3.8'
+
+networks:
+  data_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  minio_data:
+  superset_data:
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: oil_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    networks:
+      - data_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: oil_minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - data_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  create_bucket:
+    image: minio/mc:latest
+    container_name: oil_mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      /usr/bin/mc alias set myminio http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
+      /usr/bin/mc mb myminio/${MINIO_BUCKET} --ignore-existing;
+      /usr/bin/mc anonymous set download myminio/${MINIO_BUCKET};
+      exit 0;
+      "
+    networks:
+      - data_network
+
+  jupyter:
+    build: ./jupyter
+    image: jupyter/datascience-notebook:latest
+    container_name: oil_jupyter
+    restart: unless-stopped
+    environment:
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN}
+      DB_HOST: postgres
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET: ${MINIO_BUCKET}
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks
+    networks:
+      - data_network
+    depends_on:
+      - postgres
+      - minio
+
+  superset:
+    build: ./superset
+    container_name: oil_superset
+    ports:
+      - "8088:8088"
+    environment:
+      SUPERSET_SECRET_KEY: "password"
+      SUPERSET_LOAD_EXAMPLES: "no"
+      SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
+      POSTGRES_DATABASE_URI: postgresql+psycopg2://postgres:postgres@postgres:5432/oil_db
+    volumes:
+      - superset_data:/app/superset_home
+      - ./superset/superset_config.py:/app/pythonpath/superset_config.py:ro
+    networks:
+      - data_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      /bin/sh -c "
+      superset db upgrade &&
+      (superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@example.com --password admin || true) &&
+      superset init &&
+      superset set-database-uri -d oil_db -u $$POSTGRES_DATABASE_URI &&
+      superset run -h 0.0.0.0 -p 8088
+      "
